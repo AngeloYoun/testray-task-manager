@@ -16007,9 +16007,7 @@ var RC =
 		}, {
 			key: 'render',
 			value: function render() {
-				IncrementalDOM.elementOpen('div', null, null, 'class', 'testray-app');
-				iDOMHelpers.renderArbitrary(this.getPage());
-				return IncrementalDOM.elementClose('div');
+				return this.getPage();
 			}
 		}]);
 

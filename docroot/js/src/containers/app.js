@@ -19,11 +19,7 @@ class App extends JSXComponent {
 	}
 
 	render() {
-		return (
-			<div class="testray-app">
-				{this.getPage()}
-			</div>
-		);
+		return this.getPage();
 	}
 }
 
