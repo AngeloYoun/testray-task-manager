@@ -1,7 +1,7 @@
 import {CALL_API} from '../middleware/api';
 import {createActionTypes} from '../lib/util';
 
-const requestActions = ['add', 'create', 'edit', 'destroy', 'index', 'update', 'view'];
+const requestActions = ['add', 'create', 'edit', 'destroy', 'index', 'launchpadIndex', 'update', 'view'];
 
 export default ({controller, name}) => {
 	const actionTypes = requestActions.reduce(
@@ -24,6 +24,19 @@ export default ({controller, name}) => {
 					types: [actionTypes.ADD_REQUEST, actionTypes.ADD_SUCCESS, actionTypes.ADD_FAILURE]
 				}
 			};
+		},
+
+		launchpadIndex: data => {
+			console.log('launchpad')
+			return {
+				[CALL_API]: {
+					controller,
+					controllerMethod: '',
+					launchpad: true,
+					data,
+					types: [actionTypes.ADD_REQUEST, actionTypes.ADD_SUCCESS, actionTypes.ADD_FAILURE]
+				}
+			}
 		},
 
 		create: data => {

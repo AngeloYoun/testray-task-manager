@@ -9,7 +9,7 @@ import {indexProjects} from '../actions/projects';
 import {indexUsers} from '../actions/users';
 
 
-class BuildIndex extends JSXComponent {
+class NewTask extends JSXComponent {
 	attached() {
 		this.config.indexProjects();
 		this.config.indexUsers();
@@ -35,7 +35,6 @@ class BuildIndex extends JSXComponent {
 				}
 			);
 		}
-		console.log(this.selectedData['projects'])
 
 		return (
 			<div class="page-container">
@@ -54,7 +53,7 @@ class BuildIndex extends JSXComponent {
 					<DependentSelectInput
 						data={{inputId: 'buildTypes'}}
 						controller="build_types"
-						key="BuildType"
+						thisKey="BuildType"
 						parentKey="Project"
 						onChange={this.handleUpdateValue}
 						parentValue={this.selectedData['projects']}
@@ -67,7 +66,7 @@ class BuildIndex extends JSXComponent {
 					<DependentSelectInput
 						data={{inputId: 'builds'}}
 						controller="builds"
-						key="Build"
+						thisKey="Build"
 						parentKey="BuildType"
 						onChange={this.handleUpdateValue}
 						parentValue={this.selectedData['buildTypes']}
@@ -94,7 +93,7 @@ class BuildIndex extends JSXComponent {
 	}
 }
 
-BuildIndex.STATE = {
+NewTask.STATE = {
 	projects: {
 		value: {
 			loading: true
@@ -128,4 +127,4 @@ function mapDispatchToConfig(dispatch) {
 	};
 }
 
-export default connect(mapStateToConfig, mapDispatchToConfig)(BuildIndex);
+export default connect(mapStateToConfig, mapDispatchToConfig)(NewTask);

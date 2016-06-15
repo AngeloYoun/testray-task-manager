@@ -28,7 +28,7 @@ export const TaskRayApp = {
 			{
 				initialState: {
 					display: {
-						pageContext: 'buildIndex'
+						pageContext: 'taskIndex'
 					}
 				}
 			},

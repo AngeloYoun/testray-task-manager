@@ -21,20 +21,21 @@ export default request => {
 
 	const method = request.method || 'GET';
 
-	let requestURL = `http://172.16.19.102:8080/web/guest/home/-/testray/${controller}/${controllerMethod}`;
+	let baseUrl = 'http://172.16.19.102:8080/web/guest/home/-/testray';
+	let credentials = 'include';
 
-	// const headers = new Headers(
-	// 	{
-	// 		Authorization: `Basic ${btoa('test@liferay.com:test')}`,
-	// 		Origin: 'http://www.example-social-network.com'
-	// 	}
-	// );
+	if (request.launchpad) {
+		baseUrl = 'http://liferay.io/taskray';
+		credentials = '';
+	}
+
+	let requestURL = `${baseUrl}/${controller}/${controllerMethod}`;
 
 	const requestSettings = {
 		headers: {
 			Origin:'test'
 		},
-		credentials: 'include',
+		credentials,
 		method,
 		mode: 'cors'
 	};

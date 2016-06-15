@@ -3,35 +3,35 @@ import {connect} from 'metal-redux';
 
 import HeaderToolbar from '../components/header_toolbar';
 
-import BuildIndex from './build_index';
+import TaskIndex from './task_index';
+import NewTask from './new_task';
 
 class App extends JSXComponent {
-	render() {
-		let renderedPage;
-
+	getPage() {
 		const pageContext = this.config.pageContext;
 
-		if (pageContext === 'buildIndex') {
-			renderedPage = <BuildIndex />;
+		if (pageContext === 'taskIndex') {
+			return <TaskIndex />
 		}
+		else if (pageContext === 'newTask') {
+			return <NewTask />
+		}
+	}
 
-		// const headerConfig = {
-		// 	logoHref: `${WatsonConstants.urls.baseURL}/incidents`,
-		// 	signOutHref: `${themeDisplay.getPortalURL()}/c/portal/logout`,
-		// 	userName: 'Logout'
-		// };
-
+	render() {
 		return (
 			<div class="testray-app">
-				{renderedPage}
+				{this.getPage()}
 			</div>
 		);
 	}
 }
 
+
+
 App.STATE = {
 	pageContext: {
-		value: 'buildIndex'
+		value: 'taskIndex'
 	}
 };
 

@@ -35,7 +35,7 @@ class DependentSelectInput extends JSXComponent {
 
 						response.forEach(
 							entry => {
-								options[entry[`testray${this.config.key}Id`]] = {
+								options[entry[`testray${this.config.thisKey}Id`]] = {
 									label: entry.name
 								}
 							}
