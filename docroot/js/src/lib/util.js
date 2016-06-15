@@ -23,6 +23,11 @@ export function createActionTypes(action, name, genericizeKey) {
 	);
 }
 
+
+export function capsFirstLetter(string) {
+	return string[0].toUpperCase() + string.slice(1);
+}
+
 export function createReducer(initialState, actionHandlers) {
 	return (state = initialState, action) => {
 		const handler = actionHandlers[action.type];

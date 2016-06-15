@@ -6,18 +6,17 @@ import DependentSelectInput from '../components/dependent_select_input';
 import SelectInput from '../components/select_input';
 
 import {indexProjects} from '../actions/projects';
+import {indexUsers} from '../actions/users';
+
 
 class BuildIndex extends JSXComponent {
 	attached() {
 		this.config.indexProjects();
+		this.config.indexUsers();
 	}
 
 	created() {
-		this.handleProjectChange = this.handleProjectChange.bind(this);
-	}
-
-	handleProjectChange(value) {
-		console.log(value)
+		this.handleUpdateValue = this.handleUpdateValue.bind(this);
 	}
 
 	render() {
@@ -36,17 +35,44 @@ class BuildIndex extends JSXComponent {
 				}
 			);
 		}
+		console.log(this.selectedData['projects'])
 
 		return (
 			<div class="page-container">
 				<div class="project-select">
 					<span class="label">Projects</span>
-					<SelectInput data={{inputId: projects}} onChange={this.handleUpdateValue} options={options} />
+					<SelectInput
+						data={{inputId: 'projects'}}
+						onChange={this.handleUpdateValue}
+						options={options}
+						value={this.selectedData.projects}
+					/>
 				</div>
 
 				<div class="build-type-select">
 					<span class="label">Jobs</span>
+					<DependentSelectInput
+						data={{inputId: 'buildTypes'}}
+						controller="build_types"
+						key="BuildType"
+						parentKey="Project"
+						onChange={this.handleUpdateValue}
+						parentValue={this.selectedData['projects']}
+						value={this.selectedData.buildTypes}
+					/>
+				</div>
 
+				<div class="build-type-select">
+					<span class="label">Builds</span>
+					<DependentSelectInput
+						data={{inputId: 'builds'}}
+						controller="builds"
+						key="Build"
+						parentKey="BuildType"
+						onChange={this.handleUpdateValue}
+						parentValue={this.selectedData['buildTypes']}
+						value={this.selectedData.builds}
+					/>
 				</div>
 
 			</div>
@@ -91,6 +117,12 @@ function mapDispatchToConfig(dispatch) {
 			console.log('fire');
 			dispatch(
 				indexProjects()
+			);
+		},
+		indexUsers: () => {
+			console.log('fire');
+			dispatch(
+				indexUsers()
 			);
 		}
 	};

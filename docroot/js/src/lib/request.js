@@ -10,7 +10,7 @@
 
 export function serializeQueryString(data) {
 	const str = Object.keys(data).map(
-		key => `${WatsonConstants.namespace}${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+		key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
 	);
 
 	return str.join('&');
@@ -41,12 +41,12 @@ export default request => {
 
 	const requestParams = request.data || {};
 
-	// if (method === 'GET') {
-	// 	requestURL += `?${serializeQueryString(requestParams)}`;
-	// }
-	// else {
-	// 	requestSettings.body = getFormData(requestParams);
-	// }
+	if (method === 'GET') {
+		requestURL += `?${serializeQueryString(requestParams)}`;
+	}
+	else {
+		requestSettings.body = getFormData(requestParams);
+	}
 
 	return fetchURL(requestURL, requestSettings);
 };

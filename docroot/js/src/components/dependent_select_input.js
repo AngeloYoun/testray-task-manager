@@ -4,6 +4,8 @@ import SelectInput from './select_input';
 
 import sendRequest from '../lib/request';
 
+import {capsFirstLetter} from '../lib/util';
+
 class DependentSelectInput extends JSXComponent {
 	render() {
 		return (
@@ -17,8 +19,7 @@ class DependentSelectInput extends JSXComponent {
 
 		if (parentInputValue) {
 			const requestValues = {
-				parentWatsonListTypeId: parentInputValue,
-				type: listTypeValue
+				[`testray${this.config.parentKey}Id`]: parentInputValue
 			};
 
 			sendRequest(
@@ -31,11 +32,12 @@ class DependentSelectInput extends JSXComponent {
 				response => {
 					if (response) {
 						const options = {};
+
 						response.forEach(
 							entry => {
-								options[entry.testrayProjectId] = {
+								options[entry[`testray${this.config.key}Id`]] = {
 									label: entry.name
-								};
+								}
 							}
 						);
 

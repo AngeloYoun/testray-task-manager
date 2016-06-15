@@ -15169,7 +15169,7 @@ var RC =
 
 	function serializeQueryString(data) {
 		var str = Object.keys(data).map(function (key) {
-			return '' + WatsonConstants.namespace + encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+			return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
 		});
 
 		return str.join('&');
@@ -15202,12 +15202,11 @@ var RC =
 
 		var requestParams = request.data || {};
 
-		// if (method === 'GET') {
-		// 	requestURL += `?${serializeQueryString(requestParams)}`;
-		// }
-		// else {
-		// 	requestSettings.body = getFormData(requestParams);
-		// }
+		if (method === 'GET') {
+			requestURL += '?' + serializeQueryString(requestParams);
+		} else {
+			requestSettings.body = getFormData(requestParams);
+		}
 
 		return fetchURL(requestURL, requestSettings);
 	};
@@ -15253,6 +15252,10 @@ var RC =
 
 	var _projects2 = _interopRequireDefault(_projects);
 
+	var _users = __webpack_require__(259);
+
+	var _users2 = _interopRequireDefault(_users);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function basePath(state) {
@@ -15261,7 +15264,8 @@ var RC =
 
 	exports.default = (0, _reduxImmutable.combineReducers)({
 		display: _display2.default,
-		projects: _projects2.default
+		projects: _projects2.default,
+		users: _users2.default
 	});
 
 /***/ },
@@ -15523,6 +15527,7 @@ var RC =
 	});
 	exports.composeReducers = composeReducers;
 	exports.createActionTypes = createActionTypes;
+	exports.capsFirstLetter = capsFirstLetter;
 	exports.createReducer = createReducer;
 	function composeReducers() {
 		for (var _len = arguments.length, reducers = Array(_len), _key = 0; _key < _len; _key++) {
@@ -15549,6 +15554,10 @@ var RC =
 
 			return actions;
 		}, {});
+	}
+
+	function capsFirstLetter(string) {
+		return string[0].toUpperCase() + string.slice(1);
 	}
 
 	function createReducer(initialState, actionHandlers) {
@@ -15946,6 +15955,8 @@ var RC =
 
 	var _projects = __webpack_require__(73);
 
+	var _users = __webpack_require__(258);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -15969,16 +15980,12 @@ var RC =
 			key: 'attached',
 			value: function attached() {
 				this.config.indexProjects();
+				this.config.indexUsers();
 			}
 		}, {
 			key: 'created',
 			value: function created() {
-				this.handleProjectChange = this.handleProjectChange.bind(this);
-			}
-		}, {
-			key: 'handleProjectChange',
-			value: function handleProjectChange(value) {
-				console.log(value);
+				this.handleUpdateValue = this.handleUpdateValue.bind(this);
 			}
 		}, {
 			key: 'render',
@@ -15996,18 +16003,26 @@ var RC =
 						};
 					});
 				}
+				console.log(this.selectedData['projects']);
 
 				IncrementalDOM.elementOpen('div', null, null, 'class', 'page-container');
 				IncrementalDOM.elementOpen('div', null, null, 'class', 'project-select');
 				IncrementalDOM.elementOpen('span', null, null, 'class', 'label');
 				IncrementalDOM.text('Projects');
 				IncrementalDOM.elementClose('span');
-				IncrementalDOM.elementVoid(_select_input2.default, null, null, 'data', { inputId: projects }, 'onChange', this.handleUpdateValue, 'options', options);
+				IncrementalDOM.elementVoid(_select_input2.default, null, null, 'data', { inputId: 'projects' }, 'onChange', this.handleUpdateValue, 'options', options, 'value', this.selectedData.projects);
 				IncrementalDOM.elementClose('div');
 				IncrementalDOM.elementOpen('div', null, null, 'class', 'build-type-select');
 				IncrementalDOM.elementOpen('span', null, null, 'class', 'label');
 				IncrementalDOM.text('Jobs');
 				IncrementalDOM.elementClose('span');
+				IncrementalDOM.elementVoid(_dependent_select_input2.default, 'BuildType', ['controller', 'build_types', 'key', 'BuildType', 'parentKey', 'Project'], 'data', { inputId: 'buildTypes' }, 'onChange', this.handleUpdateValue, 'parentValue', this.selectedData['projects'], 'value', this.selectedData.buildTypes);
+				IncrementalDOM.elementClose('div');
+				IncrementalDOM.elementOpen('div', null, null, 'class', 'build-type-select');
+				IncrementalDOM.elementOpen('span', null, null, 'class', 'label');
+				IncrementalDOM.text('Builds');
+				IncrementalDOM.elementClose('span');
+				IncrementalDOM.elementVoid(_dependent_select_input2.default, 'Build', ['controller', 'builds', 'key', 'Build', 'parentKey', 'BuildType'], 'data', { inputId: 'builds' }, 'onChange', this.handleUpdateValue, 'parentValue', this.selectedData['buildTypes'], 'value', this.selectedData.builds);
 				IncrementalDOM.elementClose('div');
 				return IncrementalDOM.elementClose('div');
 			}
@@ -16045,6 +16060,10 @@ var RC =
 			indexProjects: function indexProjects() {
 				console.log('fire');
 				dispatch((0, _projects.indexProjects)());
+			},
+			indexUsers: function indexUsers() {
+				console.log('fire');
+				dispatch((0, _users.indexUsers)());
 			}
 		};
 	}
@@ -16075,7 +16094,11 @@ var RC =
 
 	var _request2 = _interopRequireDefault(_request);
 
+	var _util = __webpack_require__(70);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -16110,10 +16133,7 @@ var RC =
 				var parentInputValue = this.config.parentValue;
 
 				if (parentInputValue) {
-					var requestValues = {
-						parentWatsonListTypeId: parentInputValue,
-						type: listTypeValue
-					};
+					var requestValues = _defineProperty({}, 'testray' + this.config.parentKey + 'Id', parentInputValue);
 
 					(0, _request2.default)({
 						controller: this.config.controller,
@@ -16123,8 +16143,9 @@ var RC =
 						if (response) {
 							(function () {
 								var options = {};
+
 								response.forEach(function (entry) {
-									options[entry.testrayProjectId] = {
+									options[entry['testray' + _this2.config.key + 'Id']] = {
 										label: entry.name
 									};
 								});
@@ -16235,6 +16256,7 @@ var RC =
 							value: entry
 						});
 					}
+					console.log(renderedOptions);
 				}
 
 				return IncrementalDOM.elementVoid(MetalSelect, _config$key = this.config.key, ['key', _config$key], 'onChange', this.handleOnChange, 'options', renderedOptions, 'value', value ? value.toString() : '');
@@ -38453,6 +38475,63 @@ var RC =
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.indexUsers = exports.actionTypes = exports.NAME = undefined;
+
+	var _requests = __webpack_require__(74);
+
+	var _requests2 = _interopRequireDefault(_requests);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var NAME = exports.NAME = 'USERS';
+
+	var controller = 'users';
+
+	var base = (0, _requests2.default)({
+		controller: controller,
+		name: NAME
+	});
+
+	var actionTypes = base.actionTypes;
+
+	var index = base.actions.index;
+	exports.actionTypes = actionTypes;
+	exports.indexUsers = index;
+
+/***/ },
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _requestHandler = __webpack_require__(72);
+
+	var _requestHandler2 = _interopRequireDefault(_requestHandler);
+
+	var _users = __webpack_require__(258);
+
+	var _util = __webpack_require__(70);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = (0, _util.composeReducers)((0, _requestHandler2.default)({
+		actionTypes: _users.actionTypes,
+		primaryKey: 'Users'
+	}));
 
 /***/ }
 /******/ ]);

@@ -34,6 +34,7 @@ class SelectInput extends JSXComponent {
 					}
 				);
 			}
+			console.log(renderedOptions)
 		}
 
 		return (
