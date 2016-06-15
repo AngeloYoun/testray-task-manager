@@ -14,30 +14,27 @@ class TaskRay extends JSXComponent {
 
 		return (
 			<Provider store={this.store}>
-				<App elementClass={'wrapper'} />
+				<App />
 			</Provider>
 		);
 	}
 }
 
-export const TaskaRayApp = {
+export const TaskRayApp = {
 	initialize(id) {
-		const watsonComponent = new Watson(
+		const app = new TaskRay(
 			{
 				initialState: {
 					display: {
-						pageContext: 'incidentsIndex'
-					},
-					incidents: {
-						loading: false
+						pageContext: 'buildIndex'
 					}
 				}
 			},
-			document.body
+			id
 		);
 
 		this.initialized = true;
-		this.component = watsonComponent;
+		this.app = app;
 	},
 	initialized: false,
 	updateDisplay

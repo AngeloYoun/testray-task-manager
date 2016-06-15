@@ -23,14 +23,21 @@ class DependentSelectInput extends JSXComponent {
 
 			sendRequest(
 				{
-					controller: 'projects',
+					controller: this.config.controller,
 					controllerMethod: 'index.json',
 					data: requestValues
 				}
 			).then(
 				response => {
 					if (response) {
-						this.inputOptions = response;
+						const options = {};
+						response.forEach(
+							entry => {
+								options[entry.testrayProjectId] = entry.name;
+							}
+						);
+
+						this.inputOptions = options;
 					}
 				}
 			);

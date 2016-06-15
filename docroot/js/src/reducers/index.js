@@ -1,8 +1,7 @@
 import {combineReducers} from 'redux-immutable';
 
-import addresses from './addresses';
 import display from './display';
-import incidents from './incidents';
+import projects from './projects';
 
 function basePath(state) {
 	return state || '';
@@ -10,9 +9,7 @@ function basePath(state) {
 
 export default combineReducers(
 	{
-		addresses,
-		basePath,
 		display,
-		incidents
+		projects
 	}
 );

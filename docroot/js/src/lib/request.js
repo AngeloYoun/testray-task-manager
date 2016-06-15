@@ -1,12 +1,12 @@
-export function getFormData(data) {
-	const formData = new FormData();
+// export function getFormData(data) {
+// 	const formData = new FormData();
 
-	Object.keys(data).forEach(
-		key => formData.append(WatsonConstants.namespace + key, data[key])
-	);
+// 	Object.keys(data).forEach(
+// 		key => formData.append(WatsonConstants.namespace + key, data[key])
+// 	);
 
-	return formData;
-}
+// 	return formData;
+// }
 
 export function serializeQueryString(data) {
 	const str = Object.keys(data).map(
@@ -19,23 +19,34 @@ export function serializeQueryString(data) {
 export default request => {
 	const {controller, controllerMethod} = request;
 
-	const method = request.method || 'POST';
+	const method = request.method || 'GET';
 
-	let requestURL = `${WatsonConstants.urls.baseURL}/${controller}/${controllerMethod}`;
+	let requestURL = `http://172.16.19.102:8080/web/guest/home/-/testray/${controller}/${controllerMethod}`;
+
+	// const headers = new Headers(
+	// 	{
+	// 		Authorization: `Basic ${btoa('test@liferay.com:test')}`,
+	// 		Origin: 'http://www.example-social-network.com'
+	// 	}
+	// );
 
 	const requestSettings = {
-		credentials: 'same-origin',
-		method
+		headers: {
+			Origin:'test'
+		},
+		credentials: 'include',
+		method,
+		mode: 'cors'
 	};
 
 	const requestParams = request.data || {};
 
-	if (method === 'GET') {
-		requestURL += `?${serializeQueryString(requestParams)}`;
-	}
-	else {
-		requestSettings.body = getFormData(requestParams);
-	}
+	// if (method === 'GET') {
+	// 	requestURL += `?${serializeQueryString(requestParams)}`;
+	// }
+	// else {
+	// 	requestSettings.body = getFormData(requestParams);
+	// }
 
 	return fetchURL(requestURL, requestSettings);
 };

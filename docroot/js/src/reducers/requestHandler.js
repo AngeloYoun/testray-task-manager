@@ -16,7 +16,9 @@ export function updateLoading(loading) {
 }
 
 export default ({actionTypes, primaryKey}) => {
-	const key = `watson${primaryKey}Id`;
+
+	console.log(actionTypes)
+	const key = `testray${primaryKey}Id`;
 
 	const actionHandlers = {
 		[actionTypes.ADD_FAILURE]: updateLoading(false),

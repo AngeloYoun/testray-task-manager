@@ -4,42 +4,53 @@ import {Map} from 'immutable';
 
 import DependentSelectInput from '../components/dependent_select_input';
 
+import {indexProjects} from '../actions/projects';
+
 class BuildIndex extends JSXComponent {
+	attached() {
+		this.config.indexProjects();
+	}
+
 	render() {
-		const config = {
-			data: {
-				inputId
-			},
-			onChange: this.handleUpdateValue,
-			value: currentValue
-		};
+		console.log('rendering')
+		// const config = {
+		// 	data: {
+		// 		inputId: 'project'
+		// 	},
+		// 	onChange: this.handleUpdateValue,
+		// 	value: currentValue
+		// };
+
 		return (
 			<div class="page-container">
 
-				<DependentSelectInput
-					data={
-						{inputId: 'project'}
-					}
-					listTypeValue={currentInputConfig.listTypeValue}
-					parentValue={parentValue}
-				/>
+
 			</div>
 		);
 	}
 }
 
 function mapStateToConfig(state) {
-	const watsonIncidentId = state.getIn(['incidents', 'data', 'watsonIncidentId']);
-
 	return {
-		data: Map(
-			{
+		data: state.getIn(
+			[
+				'projects',
+				'data',
 				watsonIncidentId
-			}
-		),
-		loading: state.getIn(['incidents', 'loading']),
-		viewContext: state.getIn(['display', 'viewContext'])
+			]
+		)
+	}
+}
+
+function mapDispatchToConfig(dispatch) {
+	return {
+		indexProjects: () => {
+			console.log('fire');
+			dispatch(
+				indexProjects()
+			);
+		}
 	};
 }
 
-export default connect(mapStateToConfig)(BuildIndex);
+export default connect(null, mapDispatchToConfig)(BuildIndex);
