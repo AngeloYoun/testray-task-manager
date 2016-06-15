@@ -4,6 +4,7 @@ import {Map} from 'immutable';
 
 import Button from '../components/button';
 import DependentSelectInput from '../components/dependent_select_input';
+import List from '../components/list';
 import SelectInput from '../components/select_input';
 
 import {indexTasks} from '../actions/tasks';
@@ -23,27 +24,11 @@ class TaskIndex extends JSXComponent {
 	}
 
 	render() {
-		const projects = this.config.projects;
-
-		const options = {};
-
-		if (!projects.get('loading') && projects.get('data')) {
-			const data = projects.get('data');
-
-			data.forEach(
-				entry => {
-					options[entry.get('testrayProjectId')] = {
-						label: entry.get('name')
-					};
-				}
-			);
-		}
-
 		return (
 			<div class="page-container">
 				<Button onClick={this.handleNewTask} label="New Task" />
 
-				test
+				<List data={this.config.tasks.get('data')} />
 			</div>
 		);
 	}
@@ -68,7 +53,7 @@ class TaskIndex extends JSXComponent {
 }
 
 TaskIndex.STATE = {
-	projects: {
+	tasks: {
 		value: {
 			loading: true
 		}
@@ -80,7 +65,7 @@ TaskIndex.STATE = {
 
 function mapStateToConfig(state) {
 	return {
-		projects: state.get('projects')
+		tasks: state.get('tasks')
 	}
 }
 
