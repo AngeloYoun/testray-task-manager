@@ -1,0 +1,17 @@
+@import "bourbon";
+@import "mixins";
+
+@import "variables";
+@import "watson_mixins";
+
+@import "liferay_styles";
+@import "login";
+
+.watson-app {
+	@import "forms";
+	@import "header_toolbar";
+	@import "html_defaults";
+	@import "global_styles";
+	@import "incidents_list";
+	@import "select_input";
+}

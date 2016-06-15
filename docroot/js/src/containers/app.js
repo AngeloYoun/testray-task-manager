@@ -14,7 +14,6 @@ class App extends JSXComponent {
 		if (pageContext === 'buildIndex') {
 			renderedPage = <BuildIndex />;
 		}
-		console.log('rendering')
 
 		// const headerConfig = {
 		// 	logoHref: `${WatsonConstants.urls.baseURL}/incidents`,

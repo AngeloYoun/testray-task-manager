@@ -12,8 +12,16 @@ module.exports = {
 					presets: ['es2015', 'metal-jsx', 'stage-2']
 				},
 				test: /\.js$/
+			},
+			{
+				test      : /\.scss$/,
+				include   : `${__dirname}/docroot/css`,
+				loaders   : ["style", "css", "sass"]
 			}
-		]
+		],
+		sassLoader: {
+			includePaths: `${__dirname}/docroot/css`
+		}
 	},
 	output: {
 		filename: 'bundle.nocsf.js',

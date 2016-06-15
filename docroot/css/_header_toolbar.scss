@@ -1,0 +1,33 @@
+.watson-header-toolbar {
+	align-items: center;
+	border-bottom: 1px solid $neutralLighter;
+	display: flex;
+	flex-basis: 50%;
+	height: 60px;
+	justify-content: space-between;
+	padding: 0 $horizontalMargin;
+	width: 100vw;
+	z-index: 500;
+
+	.watson-logo-link {
+		.watson-logo {
+			background: url(../images/zoe_logo.png) no-repeat;
+			background-size: cover;
+			content: '';
+			height: 40px;
+			width: 86px
+		}
+	}
+
+	.watson-logout {
+		color: $neutralLight;
+		font-family: $primaryFontStack;
+		font-size: 15px;
+		transition: color 0.2s $transitionSoft;
+
+		&:focus, &:hover {
+			color: $neutralDarker;
+			text-decoration: none;
+		}
+	}
+}

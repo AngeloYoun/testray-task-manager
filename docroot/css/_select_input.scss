@@ -1,0 +1,80 @@
+.Select {
+	@include input-text;
+
+	position: relative;
+
+	.Select-control {
+		background-color: $lightest;
+		border: 1px solid $neutralLighter;
+		border-radius: $standardBorderRadius;
+		padding: 15px;
+		position: relative;
+
+		.Select-placeholder, .Select-value {
+			left: 0;
+			padding: 18px 18px 13px;
+			position: absolute;
+			top: 0;
+		}
+
+		.Select-input {
+			input {
+				&, &:focus {
+					border-width: 0;
+
+					@include input-text;
+
+					outline: none;
+				}
+			}
+		}
+
+		.Select-arrow-zone:before {
+			content: $downCaret;
+			float: right;
+
+			@include fontAwesomeIcon;
+
+			padding-top: 3px;
+		}
+
+		.Select-clear-zone {
+			display: none;
+		}
+	}
+
+	.Select-menu-outer {
+		background-color: $lightest;
+		box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.15), 0 3px 2px 0 rgba(0, 0, 0, 0.1);
+		box-sizing: border-box;
+		max-height: 400px;
+		overflow: hidden;
+		padding: 10px 0;
+		position: absolute;
+		top: 100%;
+		width: 100%;
+		z-index: $zIndexHighest;
+
+		.Select-noresults, .Select-option {
+			padding: 15px 18px;
+		}
+	}
+
+	&.is-focused {
+		.Select-control {
+			border-color: $neutralDarker;
+			color: $neutralDarker;
+		}
+
+		.Select-menu {
+			.is-focused {
+				background-color: $neutralSubtle;
+				color: $neutralDarker;
+			}
+
+			.is-selected {
+				color: $neutralLighter;
+			}
+		}
+	}
+}

@@ -1,0 +1,184 @@
+& {
+	height: 100vh;
+	width: 100vw;
+}
+
+.positive {
+	color: $positiveMedium;
+}
+
+.watson-button {
+	@include default-button;
+
+	&.primary {
+		font-size: 20px;
+		height: 57px;
+		width: 250px;
+	}
+
+	&:focus {
+		box-shadow: none;
+		outline: none;
+	}
+}
+
+.watson-input {
+	align-items: center;
+	background-color: $lightest;
+	border: 1px solid $neutralLight;
+	border-radius: $standardBorderRadius;
+	color: $neutralLight;
+	display: flex;
+	font-size: 16px;
+	height: 48px;
+	justify-content: center;
+	margin-bottom: 5px;
+	padding: 0 16px;
+	width: 200px;
+
+	&:focus, &:hover {
+		border-color: $neutralDarker;
+		box-shadow: none;
+		color: $neutralDarker;
+		outline: none;
+		text-decoration: none;
+	}
+
+	&.select-input {
+		@include appearance(none);
+
+		cursor: pointer;
+		margin-bottom: 0;
+	}
+}
+
+.dynamic-input-select {
+	.dynamic-select-input-group {
+		margin: 34px 0;
+		position: relative;
+
+		.watson-button.remove-button {
+			height: 48px;
+			margin-top: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 48px;
+
+			&:after {
+				content: '\f00d';
+
+				@include fontAwesomeIcon;
+
+				font-size: 16px;
+				position: absolute;
+				right: 16px;
+				top: calc(50% - 12px);
+			}
+		}
+	}
+}
+
+.select-input-container {
+	display: inline-block;
+	margin-bottom: 5px;
+	position: relative;
+
+	&:after {
+		content: '\f0d7';
+
+		@include fontAwesomeIcon;
+
+		position: absolute;
+		right: 14px;
+		top: calc(50% - 8px);
+	}
+}
+
+.header-container {
+	margin: 0 0 40px;
+
+	.main-header {
+		@include main-header;
+
+		margin: 0 0 20px;
+	}
+
+	.sub-header {
+		margin: 0 0 20px;
+
+		@include sub-header;
+	}
+}
+
+.page-container, .content-container, .sidebar {
+	vertical-align: top;
+}
+
+.page-container {
+	height: calc(100vh - 60px);
+	padding: 0 84px;
+}
+
+.content-container {
+	box-sizing: border-box;
+	display: inline-block;
+	height: 100%;
+	margin-left: 80px;
+	overflow: visible;
+	width: calc(100% - #{$sidebarWidth} - 80px);
+
+	.content-header {
+		border-bottom: 1px solid $neutralDarker;
+
+		@include content-header;
+
+		margin: 80px 0 48px;
+		padding: 0 0 10px;
+	}
+
+	.content {
+		height: calc(100% - 164px);
+		overflow: auto;
+	}
+}
+
+.sidebar {
+	border-right: 1px solid $neutralLighter;
+	box-sizing: border-box;
+	display: inline-block;
+	height: calc(100vh - 60px);
+	padding: 64px 24px 0 0;
+	width: $sidebarWidth;
+
+	.watson-nav {
+		color: $neutralLight;
+		font-family: $primaryFontStack;
+		font-size: 15px;
+
+		.watson-nav-entry {
+			border-bottom: 1px solid transparent;
+			margin: 0 0 26px;
+			transition: color 0.2s $transitionSoft, border-color 0.15s $transitionSoft;
+
+			&:hover, &.selected {
+				color: $neutralDarker;
+			}
+
+			&.selected {
+				border-bottom-color: $neutralDarker;
+			}
+
+			.watson-nav-link {
+				color: inherit;
+				cursor: pointer;
+				display: inline-block;
+				width: 100%;
+
+				&:focus, &:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}

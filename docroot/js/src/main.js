@@ -2,6 +2,8 @@ import JSXComponent from 'metal-jsx';
 import {Provider} from 'metal-redux';
 import {fromJS} from 'immutable';
 
+require('../../css/main.scss');
+
 import {updateDisplay} from './actions/display';
 
 import configureStore from './store/configure_store.js';
@@ -30,7 +32,7 @@ export const TaskRayApp = {
 					}
 				}
 			},
-			id
+			document.getElementById(id)
 		);
 
 		this.initialized = true;

@@ -1,0 +1,85 @@
+/* ----------  Button style ---------- */
+
+@mixin default-button {
+	align-items: center;
+	background-color: $lightest;
+	border: 1px solid $neutralLight;
+	border-radius: $standardBorderRadius;
+	color: $neutralLight;
+	display: flex;
+	justify-content: center;
+
+	&:focus, &:hover {
+		border-color: $neutralDarker;
+		color: $neutralDarker;
+		text-decoration: none;
+	}
+}
+
+/* ----------  Text styles ---------- */
+
+@mixin fontAwesomeIcon {
+	color: $neutralLighter;
+	font-family: $fontAwesome;
+	font-size: 15px;
+}
+
+@mixin main-header {
+	color: $neutralDark;
+	font-family: $primaryFontStack;
+	font-size: 44px;
+	font-weight: 100;
+	letter-spacing: 0.12em;
+	line-height: 1em;
+}
+
+@mixin sub-header {
+	color: $neutralMedium;
+	font-family: $primaryFontStack;
+	font-size: 20px;
+	font-weight: 200;
+	line-height: 1em;
+}
+
+@mixin content-header {
+	color: $neutralDarker;
+	font-family: $primaryFontStack;
+	font-size: 15px;
+	font-weight: 200;
+	letter-spacing: 0.07em;
+	line-height: 1.6em;
+}
+
+@mixin input-text {
+	color: $neutralMedium;
+	font-family: $primaryFontStack;
+	font-size: 20px;
+	font-weight: 100;
+	letter-spacing: 0.15em;
+	line-height: 1em;
+}
+
+@mixin row-header-text {
+	color: $neutralDarker;
+	font-family: $primaryFontStack;
+	font-size: 28px;
+	font-weight: 100;
+	letter-spacing: 0.15em;
+	line-height: 1em;
+}
+
+@mixin row-sub-header-text {
+	font-family: $primaryFontStack;
+	color: $neutralDark;
+	font-size: 15px;
+	font-weight: 200;
+	letter-spacing: 0.05em;
+	line-height: 1em;
+}
+
+@mixin small-info-text {
+	color: $neutralLight;
+	font-family: $primaryFontStack;
+	font-size: 12px;
+	font-weight: 200;
+}

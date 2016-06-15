@@ -1,0 +1,50 @@
+/* ---------- Watson Colors ---------- */
+
+$darkest: #000;
+$lightest: #FFF;
+
+$neutralDark: #6C7982;
+$neutralDarker: #303A40;
+$neutralLight: #A6B2B7;
+$neutralLighter: #CCD4D7;
+$neutralMedium: #9CA3A8;
+$neutralSubtle: #F5F6F7;
+
+$positiveLight: #A8F9D7;
+$positiveMedium: #3FE49F;
+
+$negativeLight: #FFC4C4;
+$negativeMedium: #FF7474;
+
+/* ---------- Bezier Curves ---------- */
+
+$transitionSoft: cubic-bezier(0.65, 0.42, 0.29, 1.13);
+
+/* ---------- Box Shadows ---------- */
+
+$mediumShadow: 0 5px 36px rgba(0, 0, 0, 0.05), 0 5px 23px rgba(0, 0, 0, 0.05);
+
+/* ---------- Font Stacks ---------- */
+
+$fontAwesome: FontAwesome-Alloy;
+$primaryFontStack: Helvetica Neue, Helvetica, Arial, sans-serif;
+
+/* ---------- Global Sizes ---------- */
+
+$horizontalMargin: 84px;
+
+$headerHeight: 80px;
+
+$sidebarWidth: 300px;
+
+$standardBorderRadius: 4px;
+
+$contentHeaderHeight: 163px;
+
+/* ---------- Icons ---------- */
+
+$downCaret: '\f0d7';
+
+/* ---------- Z-Index ---------- */
+
+$zIndexHighest: 1000;

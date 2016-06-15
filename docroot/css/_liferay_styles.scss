@@ -1,0 +1,19 @@
+/* ---------- DXP styling ---------- */
+
+body #wrapper.hide-dockbar {
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+
+	.portlet {
+		margin-bottom: 0;
+
+		.portlet-topper {
+			display: none;
+		}
+
+		.portlet-content {
+			padding: 0;
+		}
+	}
+}

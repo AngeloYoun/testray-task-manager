@@ -29,7 +29,11 @@
 		"react-select": "^1.0.0-beta13",
 		"redux": "^3.5.2",
 		"redux-immutable": "^3.0.3",
-		"redux-thunk": "^1.0.3"
+		"redux-thunk": "^1.0.3",
+		"sass-loader": "latest",
+		"css-loader": "latest",
+		"style-loader": "latest",
+		"node-sass": "latest"
 	},
 	"description": "Watson Portlet",
 	"devDependencies": {
