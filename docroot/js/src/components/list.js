@@ -12,9 +12,9 @@ function List({data}) {
 	}
 
 	return (
-		<div class="incidents-list">
+		<table class="table incidents-list">
 			{incidentRows}
-		</div>
+		</table>
 	);
 }
 

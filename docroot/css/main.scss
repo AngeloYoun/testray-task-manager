@@ -1,3 +1,13 @@
+@import "~bootstrap/scss/bootstrap";
+
 @import "variables";
 @import "watson_mixins";
 @import "select_input";
+
+@import "new_variables";
+
+@import "layout";
+@import "selects";
+@import "status";
+@import "tables";
+@import "typography";

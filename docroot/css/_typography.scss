@@ -1,0 +1,14 @@
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: normal;
+}
+
+h1 {
+	font-weight: 300;
+	margin: 30px 0;
+
+	&.site-title {
+		color: $lightGray;
+		font-size: 18px;
+	}
+}
