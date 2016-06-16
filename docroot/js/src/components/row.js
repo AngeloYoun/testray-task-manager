@@ -20,24 +20,16 @@ function formatRowContent(rowContent) {
 
 function Row({entry}) {
 	return (
-		<div class="incident-row">
+		<tr class="incident-row">
 			<a href={entry.link}>
-				<div class="row-header-container">
-					<span class="row-header">{entry.get('buildName')}</span>
+				<td class="row-header">{entry.get('buildName')}</td>
 
-					<span class="row-sub-header">{entry.get('status')}</span>
+				<td class="row-sub-header"><span class="status status-in-analysis">{entry.get('status')}</span></td>
 
-					<span class="row-reported-by">{`Created on ${entry.get('createdDate')}`}</span>
-				</div>
-
-				<div class="row-body-container">
-					{formatRowContent(entry.get('assignees'))}
-				</div>
-
-				<div class="row-right-container">
-				</div>
+				<td class="row-reported-by">{`Created on ${entry.get('createdDate')}`}</td>
+				<td class="row-reported-by">{formatRowContent(entry.get('assignees'))}</td>
 			</a>
-		</div>
+		</tr>
 	);
 }
 

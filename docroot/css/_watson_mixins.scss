@@ -53,18 +53,16 @@
 @mixin input-text {
 	color: $neutralMedium;
 	font-family: $primaryFontStack;
-	font-size: 20px;
-	font-weight: 100;
-	letter-spacing: 0.15em;
+	font-size: 1em;
+	font-weight: normal;
 	line-height: 1em;
 }
 
 @mixin row-header-text {
 	color: $neutralDarker;
 	font-family: $primaryFontStack;
-	font-size: 28px;
-	font-weight: 100;
-	letter-spacing: 0.15em;
+	font-size: 1.2em;
+	font-weight: normal;
 	line-height: 1em;
 }
 

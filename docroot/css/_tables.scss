@@ -1,0 +1,14 @@
+.table {
+	font-size: 0.9em;
+
+	thead th {
+		border-bottom: 1px solid $darkGray;
+		border-top-width: 0;
+		color: $lightGray;
+		font-weight: normal;
+	}
+
+	td {
+		padding: 1.3rem 0.75rem;
+	}
+}
